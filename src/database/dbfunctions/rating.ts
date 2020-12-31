@@ -13,7 +13,6 @@ const RatingClass = {
     if (!rate) {
       return false;
     }
-    console.log(rate);
     return rate;
   },
 

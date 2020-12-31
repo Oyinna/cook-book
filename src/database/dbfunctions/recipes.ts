@@ -1,6 +1,6 @@
 import RecipesM, {Recipes} from '../models/recipes';
 import Rating from './rating';
-import {ObjectId} from 'mongodb';
+import {ObjectId} from 'mongodb'
 
 type recipesDetailT = {
     name?: string,
@@ -25,10 +25,11 @@ const RecipesClass = {
   },
 
   allRecipes: async (limit: number, startIndex: number, search: string) => {
-    const recipes = await RecipesM.find({ Name: { $regex: search, $options: 'i' } })
+    const recipes = await RecipesM.find({ name: { $regex: search, $options: 'i' } })
       .limit(limit)
       .skip(startIndex)
       .sort('-createdOn');
+
     if (!recipes) {
       return false;
     }
@@ -51,7 +52,7 @@ const RecipesClass = {
     return recipes;
   },
 
-  fetchByIdAndDelete: async (id: ObjectId) => {
+  fetchByIdAndDelete: async (id:ObjectId) => {
     const recipes = await RecipesM.findByIdAndDelete(id);
     if (!recipes) {
       return false;

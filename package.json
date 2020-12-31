@@ -8,8 +8,8 @@
     "start": "tsc && nodemon -x ts-node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./",
-    "seed": "ts-node database/seed/index",
-    "seed:rollback": "ts-node database/seed/index --rollback"
+    "seed": "ts-node ./dist/database/seed/index.js",
+    "seed:rollback": "ts-node ./dist/database/seed/index.js --rollback"
   },
   "repository": {
     "type": "git",

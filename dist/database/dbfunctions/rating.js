@@ -20,7 +20,6 @@ const RatingClass = {
         if (!rate) {
             return false;
         }
-        console.log(rate);
         return rate;
     }),
     deleteRatings: (id) => __awaiter(void 0, void 0, void 0, function* () {

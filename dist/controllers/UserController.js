@@ -21,7 +21,6 @@ const UsersController = {
     // login user
     login: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            console.log(req.body);
             if (!req.body.username || !req.body.password) {
                 return res.status(400).send({
                     success: false,

@@ -10,7 +10,6 @@ const UsersController = {
   // login user
   login: async (req: Request, res: Response) => {
     try {
-      console.log(req.body);
       if (!req.body.username || !req.body.password) {
         return res.status(400).send({
           success: false,

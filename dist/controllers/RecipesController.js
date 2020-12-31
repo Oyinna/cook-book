@@ -18,20 +18,16 @@ const RecipesController = {
     // Retrieve and return all recipes from the database.
     getAll: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            let { search } = req.query;
-            if (!search) {
-                search = '';
-            }
-            // pagination
-            const page = parseInt(req.query.page, 10);
-            const limit = parseInt(req.query.limit, 10);
+            const search = req.query.search ? req.query.search : '';
+            const limit = req.query.limit ? parseInt(req.query.limit, 10) : 10;
+            const page = req.query.page ? parseInt(req.query.page, 10) : 1;
             const startIndex = (page - 1) * limit;
             const endIndex = page * limit;
             //   const results = {};
             const totalRecipes = yield recipes_1.default.totalNo();
             let results = {};
             if (endIndex < totalRecipes) {
-                let results = {
+                results = {
                     next: {
                         page: page + 1,
                         limit
@@ -39,7 +35,7 @@ const RecipesController = {
                 };
             }
             if (startIndex > 0) {
-                let results = {
+                results = {
                     previous: {
                         page: page - 1,
                         limit,
@@ -141,17 +137,17 @@ const RecipesController = {
     update: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             // validate Difficulty if it exist
-            if (req.body.Difficulty) {
-                if ((typeof req.body.Difficulty !== 'number') || (req.body.Difficulty <= 0) || (req.body.Difficulty > 3)) {
+            if (req.body.difficulty) {
+                if ((typeof req.body.difficulty !== 'number') || (req.body.difficulty <= 0) || (req.body.difficulty > 3)) {
                     return res.status(400).send({
                         success: false,
-                        message: 'Difficulty field should be a number',
+                        message: 'Difficulty field should be a number not greater than 3',
                     });
                 }
             }
             // validate Vegetarian if it exist
-            if (req.body.Vegetarian) {
-                if (typeof req.body.Vegetarian !== 'boolean') {
+            if (req.body.vegetarian) {
+                if (typeof req.body.vegetarian !== 'boolean') {
                     return res.status(400).send({
                         success: false,
                         message: 'Vegetarian field should be boolean',

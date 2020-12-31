@@ -29,7 +29,7 @@ const RecipesClass = {
         return no;
     }),
     allRecipes: (limit, startIndex, search) => __awaiter(void 0, void 0, void 0, function* () {
-        const recipes = yield recipes_1.default.find({ Name: { $regex: search, $options: 'i' } })
+        const recipes = yield recipes_1.default.find({ name: { $regex: search, $options: 'i' } })
             .limit(limit)
             .skip(startIndex)
             .sort('-createdOn');
