@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon -x ts-node src/index.ts",
+    "build": "tsc --w",
+    "start": "tsc && nodemon -x ts-node ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "seed": "ts-node database/seed/index",
+    "seed:rollback": "ts-node database/seed/index --rollback"
   },
   "repository": {
     "type": "git",
@@ -35,10 +38,14 @@
     "nodemon": "^2.0.6"
   },
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/jsonwebtoken": "^8.5.0",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.8",
     "monodb": "^1.4.2",
     "ts-node": "^9.1.1",

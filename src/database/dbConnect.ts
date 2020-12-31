@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import {config} from '../config';
 
 const dbconnection = async(url: string)=>{
   try{
@@ -9,9 +10,11 @@ const dbconnection = async(url: string)=>{
       console.log('database not connected')
     }
   }
-  catch{
-      console.log('database not connected')
+  catch (err){
+      console.log(err)
   }
 }
 
-export {dbconnection};
+dbconnection(<string>config.mogodb_url)
+// export default dbconnection;
+export {mongoose}
