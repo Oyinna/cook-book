@@ -17,6 +17,7 @@ const RatingClass = {
     //  ------save data------
     saveRating: (rating) => __awaiter(void 0, void 0, void 0, function* () {
         const rate = yield rating_1.default.create(rating);
+        console.log(rate, 'rrraatte');
         if (!rate) {
             return false;
         }

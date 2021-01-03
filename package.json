@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --w",
-    "start": "tsc && nodemon -x ts-node ./dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && nodemon -x ts-node ./dist/src/index.js",
+    "test": "cross-env NODE_ENV=test mocha './dist/test/**/*.js' ",
     "lint": "eslint ./",
-    "seed": "ts-node ./dist/database/seed/index.js",
-    "seed:rollback": "ts-node ./dist/database/seed/index.js --rollback"
+    "seed": "ts-node ./dist/src/database/seed/index.js",
+    "seed:rollback": "ts-node ./dist/src/database/seed/index.js --rollback"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "@types/node": "^14.14.14",
     "@typescript-eslint/eslint-plugin": "^4.10.0",
     "@typescript-eslint/parser": "^4.10.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.15.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.22.1",
@@ -39,13 +40,18 @@
   },
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
+    "@types/chai": "^4.2.14",
     "@types/jsonwebtoken": "^8.5.0",
+    "@types/mocha": "^8.2.0",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "mocha": "^8.2.1",
     "mongoose": "^5.11.8",
     "monodb": "^1.4.2",
     "ts-node": "^9.1.1",

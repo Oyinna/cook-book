@@ -15,4 +15,4 @@ server.use('/', routes_1.router);
 server.listen(config_1.config.port, () => {
     console.log('Express server listening on port', config_1.config.port);
 });
-// export { server };
+exports.default = server;

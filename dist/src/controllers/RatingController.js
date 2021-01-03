@@ -55,6 +55,7 @@ const RatingController = {
             });
         }
         catch (err) {
+            console.log(err);
             return res.status(500).send({
                 success: false,
                 message: 'An error occured while saving rating',

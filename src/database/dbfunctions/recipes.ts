@@ -1,6 +1,6 @@
 import RecipesM, {Recipes} from '../models/recipes';
 import Rating from './rating';
-import {ObjectId} from 'mongodb'
+import {ObjectId} from 'mongodb';
 
 type recipesDetailT = {
     name?: string,

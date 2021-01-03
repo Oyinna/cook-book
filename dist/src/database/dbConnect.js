@@ -16,18 +16,23 @@ exports.mongoose = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 exports.mongoose = mongoose_1.default;
 const config_1 = require("../config");
-const dbconnection = (url) => __awaiter(void 0, void 0, void 0, function* () {
+const dbconnection = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const connection = yield mongoose_1.default.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
-        if (connection === mongoose_1.default) {
-            console.log('database connected');
+        let connection;
+        if (config_1.config.environment_check === 'test') {
+            console.log('test database connected ');
+            connection = yield mongoose_1.default.connect(config_1.config.test_mongodb_url, { useNewUrlParser: true, useUnifiedTopology: true });
+            console.log('test database connected 2');
         }
         else {
-            console.log('database not connected');
+            console.log('App database connected 1');
+            connection = yield mongoose_1.default.connect(config_1.config.mongodb_url, { useNewUrlParser: true, useUnifiedTopology: true });
+            console.log('App database connected 2');
         }
+        // console.log(`${connection} database connected`)
     }
     catch (err) {
-        console.log(err);
+        console.log(`${err} database not connected`);
     }
 });
-dbconnection(config_1.config.mogodb_url);
+dbconnection();

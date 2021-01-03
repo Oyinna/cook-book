@@ -1,20 +1,25 @@
 import mongoose from 'mongoose';
 import {config} from '../config';
 
-const dbconnection = async(url: string)=>{
+const dbconnection = async()=>{
   try{
-    const connection = await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-    if(connection===mongoose){
-      console.log('database connected')
+    let connection
+    if(config.environment_check === 'test'){
+      console.log('test database connected ')
+      connection = await mongoose.connect(<string>config.test_mongodb_url, { useNewUrlParser: true, useUnifiedTopology: true })
+      console.log('test database connected 2')
     }else{
-      console.log('database not connected')
+      console.log('App database connected 1')
+      connection = await mongoose.connect(<string>config.mongodb_url, { useNewUrlParser: true, useUnifiedTopology: true })
+      console.log('App database connected 2')
     }
+    // console.log(`${connection} database connected`)
   }
   catch (err){
-      console.log(err)
+      console.log(`${err} database not connected`)
   }
 }
 
-dbconnection(<string>config.mogodb_url)
+dbconnection()
 // export default dbconnection;
 export {mongoose}

@@ -10,6 +10,7 @@ const RatingClass = {
   //  ------save data------
   saveRating: async (rating: ratingT) => {
     const rate = await RateM.create(<Rate> rating);
+    console.log(rate, 'rrraatte')
     if (!rate) {
       return false;
     }
