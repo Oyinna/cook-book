@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const recipes_1 = __importDefault(require("../database/dbfunctions/recipes"));
+const recipes_1 = __importDefault(require("../database/services/recipes"));
 const mongodb_1 = require("mongodb");
 const RecipesController = {
     // Retrieve and return all recipes from the database.
@@ -23,28 +23,34 @@ const RecipesController = {
             const page = req.query.page ? parseInt(req.query.page, 10) : 1;
             const startIndex = (page - 1) * limit;
             const endIndex = page * limit;
-            //   const results = {};
             const totalRecipes = yield recipes_1.default.totalNo();
-            let results = {};
+            let next = {
+                page: 0,
+                limit: 5
+            };
+            let previous = {
+                page: 0,
+                limit: 5
+            };
             if (endIndex < totalRecipes) {
-                results = {
-                    next: {
-                        page: page + 1,
-                        limit
-                    }
+                next = {
+                    page: page + 1,
+                    limit
                 };
             }
             if (startIndex > 0) {
-                results = {
-                    previous: {
-                        page: page - 1,
-                        limit,
-                    }
+                previous = {
+                    page: page - 1,
+                    limit,
                 };
             }
             const dbFetch = yield recipes_1.default.allRecipes(limit, startIndex, search);
+            const pagenation = {
+                next,
+                previous
+            };
             const data = {
-                results,
+                pagenation,
                 dbFetch
             };
             return res.status(200).send({

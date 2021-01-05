@@ -1,6 +1,7 @@
 import {Request, Response} from 'express';
-import Recipes from '../database/dbfunctions/recipes';
+import Recipes from '../database/services/recipes';
 import {ObjectId} from 'mongodb';
+import {TPosition, TPagenation} from '../types/pagenation'
 
 const RecipesController = {
 // Retrieve and return all recipes from the database.
@@ -14,52 +15,41 @@ const RecipesController = {
       const startIndex = (page - 1) * limit;
       const endIndex = page * limit;
 
-      type nextT = {
-        page: number,
-        limit: number
-      };
-
-      type previousT = {
-        page: number,
-        limit: number
-      };
-
-      type resultsT = {
-        next?: nextT,
-        previous?: previousT,
-      };
-
-    //   const results = {};
       const totalRecipes = await Recipes.totalNo();
-      let results: resultsT = {
 
+      let next:TPosition = {
+        page: 0,
+        limit: 5
       }
+
+      let previous:TPosition = {
+        page: 0,
+        limit: 5
+      }
+
       if (endIndex < totalRecipes) {
-        results = {
-         next: {
+         next = {
             page: page + 1,
             limit
          }
-        }
-      }
+       }
 
       if (startIndex > 0) {
-        results = {
-            previous: {
-                page: page - 1,
-                limit,
-            }
-        };
-      }
+        previous = {
+          page: page - 1,
+          limit,
+        }
+       }
+
       const dbFetch = await Recipes.allRecipes(limit, startIndex, <string>search);
-      
-      type dataT = {
-          results: resultsT,
-          dbFetch: string[]
+
+      const pagenation: TPagenation = {
+        next,
+        previous
       }
 
       const data = {
-        results,
+        pagenation,
         dbFetch
       }
 

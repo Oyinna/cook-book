@@ -2,7 +2,7 @@ import {Request,Response} from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {config} from '../config';
-import User from '../database/dbfunctions/users';
+import User from '../database/services/users';
 
 function generateToken(user: any) { return jwt.sign(user.toJSON(), <string>config.access_token, { expiresIn: '1w' }); }
 

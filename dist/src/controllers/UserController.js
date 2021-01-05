@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_1 = require("../config");
-const users_1 = __importDefault(require("../database/dbfunctions/users"));
+const users_1 = __importDefault(require("../database/services/users"));
 function generateToken(user) { return jsonwebtoken_1.default.sign(user.toJSON(), config_1.config.access_token, { expiresIn: '1w' }); }
 const UsersController = {
     // login user

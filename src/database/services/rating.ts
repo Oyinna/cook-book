@@ -1,14 +1,11 @@
 import RateM, {Rate} from '../models/rating';
 import {ObjectId} from 'mongodb';
+import {TRating} from '../../types/services'
 
-type ratingT = {
-    recipeId: ObjectId,
-    rate: number
-  };
 
 const RatingClass = {
   //  ------save data------
-  saveRating: async (rating: ratingT) => {
+  saveRating: async (rating: TRating) => {
     const rate = await RateM.create(<Rate> rating);
     console.log(rate, 'rrraatte')
     if (!rate) {

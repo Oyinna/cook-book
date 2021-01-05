@@ -1,16 +1,12 @@
+
+import {TRecipesDetail} from '../../types/services'
 import RecipesM, {Recipes} from '../models/recipes';
 import Rating from './rating';
 import {ObjectId} from 'mongodb';
 
-type recipesDetailT = {
-    name?: string,
-    difficulty?: number,
-    vegetarian?: boolean
-  }
-
 const RecipesClass = {
   //  ------save data------
-  saveRecipes: async (recipesDetail: recipesDetailT) => {
+  saveRecipes: async (recipesDetail: TRecipesDetail) => {
     const recipes = await RecipesM.create(<Recipes>recipesDetail);
     if (!recipes) {
       return false;
@@ -44,7 +40,7 @@ const RecipesClass = {
     return recipes;
   },
 
-  fetchByIdAndUpdate: async (id: ObjectId, recipesDetail: recipesDetailT) => {
+  fetchByIdAndUpdate: async (id: ObjectId, recipesDetail: TRecipesDetail) => {
     const recipes = await RecipesM.findByIdAndUpdate(id, { $set: recipesDetail }, { new: true });
     if (!recipes) {
       return false;

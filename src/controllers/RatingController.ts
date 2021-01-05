@@ -1,6 +1,6 @@
-import Rating from '../database/dbfunctions/rating';
+import Rating from '../database/services/rating';
 import {Request, Response} from 'express';
-import Recipes from '../database/dbfunctions/recipes';
+import Recipes from '../database/services/recipes';
 import {ObjectId} from 'mongodb';
 
 const RatingController = {

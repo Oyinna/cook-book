@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const rating_1 = __importDefault(require("../database/dbfunctions/rating"));
-const recipes_1 = __importDefault(require("../database/dbfunctions/recipes"));
+const rating_1 = __importDefault(require("../database/services/rating"));
+const recipes_1 = __importDefault(require("../database/services/recipes"));
 const mongodb_1 = require("mongodb");
 const RatingController = {
     // Create and Save a new Recipes
