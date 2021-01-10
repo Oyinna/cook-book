@@ -6,7 +6,7 @@ const dbconnection = async()=>{
     let connection
     if(config.environment_check === 'test'){
       console.log('test database connected ')
-      connection = await mongoose.connect(<string>config.test_mongodb_url, { useNewUrlParser: true, useUnifiedTopology: true })
+      connection = await mongoose.connect(<string>config.test_mongodb_url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
       console.log('test database connected 2')
     }else{
       console.log('App database connected 1')

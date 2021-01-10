@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --w",
-    "start": "tsc && nodemon -x ts-node ./dist/src/index.js",
-    "test": "cross-env NODE_ENV=test mocha './dist/test/**/*.js' ",
+    "startJ": "tsc && nodemon -x ts-node ./dist/src/index.js",
+    "testJ": "cross-env NODE_ENV=test mocha './dist/test/**/*.js' ",
+    "start": "tsc && nodemon -x ts-node ./src/index.ts",
+    "test": "cross-env NODE_ENV=test TS_NODE_PROJECT=tsconfig.testing.json mocha --require ts-node/register './test/**/*.ts' ",
+    "coverage": "NODE_ENV=test nyc mocha --require ts-node/register test/**/*.ts --exit",
     "lint": "eslint ./",
     "seed": "ts-node ./dist/src/database/seed/index.js",
     "seed:rollback": "ts-node ./dist/src/database/seed/index.js --rollback"
@@ -36,7 +39,8 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "nyc": "^15.1.0"
   },
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
