@@ -1,28 +1,25 @@
-import * as mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+import {config} from '../config';
 
-dotenv.config();
-export class DbConnect {
-  public static connect(MONGODB_URI: string) {
-    return new Promise((resolve, reject) => {
-      mongoose.connect(MONGODB_URI, (err, data: mongoose.ClientSession) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(data);
-        }
-      });
-    });
+const dbconnection = async()=>{
+  try{
+    let connection
+    if(config.environment_check === 'test'){
+      console.log('test database connected ')
+      connection = await mongoose.connect(<string>config.test_mongodb_url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+      console.log('test database connected 2')
+    }else{
+      console.log('App database connected 1')
+      connection = await mongoose.connect(<string>config.mongodb_url, { useNewUrlParser: true, useUnifiedTopology: true })
+      console.log('App database connected 2')
+    }
+    // console.log(`${connection} database connected`)
+  }
+  catch (err){
+      console.log(`${err} database not connected`)
   }
 }
 
-// readFile('hello.txt')
-// .then(data=>{
-//     return data;
-// })
-// .then(data=>{
-//     console.log(`${data} I'm Chinyelu and I love clen and maintainable code`)
-// })
-// .catch(err=>{
-//     console.log(err)
-// })
+dbconnection()
+// export default dbconnection;
+export {mongoose}
